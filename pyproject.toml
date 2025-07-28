@@ -1,0 +1,14 @@
+[project]
+name = "gpu-alloc-exporter"
+version = "0.1.0"
+description = "Prometheus exporter for GPU allocation in Docker containers"
+authors = [
+    { name = "Constantinos Xanthopoulos", email = "conx@xanthopoulos.info" }
+]
+readme = "README.md"
+requires-python = ">=3.8"
+
+dependencies = [
+    "docker",
+    "prometheus_client"
+]
