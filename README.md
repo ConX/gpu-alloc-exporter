@@ -59,6 +59,8 @@ Metrics will be available at [http://localhost:8300/metrics](http://localhost:83
 
 ## Visualizing in Grafana
 
+![Grafana GPU Allocations Table](doc/grafana-gpu-alloc.png)
+
 To visualize GPU allocations in Grafana using the exported Prometheus metrics:
 
 1. **Add Prometheus as a data source** in Grafana.
