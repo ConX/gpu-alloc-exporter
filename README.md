@@ -10,10 +10,49 @@ Prometheus exporter for monitoring GPU allocation in Docker containers.
 
 ## Usage
 
-### With Docker Compose
+### With Docker Compose (local repo)
 
 ```sh
 docker compose up --build
+```
+
+Metrics will be available at [http://localhost:8300/metrics](http://localhost:8300/metrics).
+
+### With Docker Compose (using published image)
+
+Create a `docker-compose.yml` like:
+
+```yaml
+version: "3.8"
+services:
+  gpu-alloc-exporter:
+    image: ghcr.io/conx/gpu-alloc-exporter:latest
+    ports:
+      - "8300:8000" # Map host port 8300 to exporter port 8000
+    environment:
+      - EXPORTER_PORT=8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /usr/bin/nvidia-smi:/usr/bin/nvidia-smi:ro
+```
+
+Then run:
+
+```sh
+docker compose up
+```
+
+Metrics will be available at [http://localhost:8300/metrics](http://localhost:8300/metrics).
+
+### With Docker
+
+```sh
+docker run -d \
+  -p 8300:8000 \
+  -e EXPORTER_PORT=8000 \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -v /usr/bin/nvidia-smi:/usr/bin/nvidia-smi:ro \
+  ghcr.io/conx/gpu-alloc-exporter:latest
 ```
 
 Metrics will be available at [http://localhost:8300/metrics](http://localhost:8300/metrics).
